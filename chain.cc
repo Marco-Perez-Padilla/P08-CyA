@@ -24,6 +24,7 @@
 **      19/10/2024 - Adición de constructor en base a un std::string
 **      21/10/2024 - Adición método FindAll
 **      21/10/2024 - Adición sobrecarga operador []
+**      01/11/2024 - Adicion sobrecarga operador >>
 **/
 
 #include <algorithm>
@@ -141,4 +142,16 @@ const Symbol& Chain::operator[](long unsigned int index) const {
     throw std::out_of_range("Index out of range.");
   }
   return getChain()[index];
+}
+
+
+/**
+ * @brief Overload of >> operator 
+ * @param istream 
+ * @param Chain
+ * @return istream
+ */
+std::istream& operator >>(std::istream& in, Chain& cadena) {
+  in >> cadena;
+  return in;
 }

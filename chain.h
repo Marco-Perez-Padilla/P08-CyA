@@ -23,6 +23,7 @@
 **      19/10/2024 - Adición de constructor en base a un std::string
 **      21/10/2024 - Adición método FindAll
 **      21/10/2024 - Adición sobrecarga operador []
+**      01/11/2024 - Adicion sobrecarga operador >>
 **/
 
 #ifndef CHAIN_H
@@ -50,7 +51,6 @@ class Chain {
   const Chain Inverse () const;
   void AddBack (const Symbol& new_symbol);
   bool Empty() const; 
-  const long unsigned int Size() const;
   const long unsigned int FindAll(const Symbol& symbol) const;
 
   //Overload of operators
@@ -62,5 +62,6 @@ class Chain {
 
 };
 std::ostream& operator<<(std::ostream& os, const Chain&);
+std::istream& operator>>(std::istream& in, Chain&);
 
 #endif
