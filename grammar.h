@@ -17,6 +17,7 @@
 
 ** Historial de revisiones:
 **      01/11/2024 - Creacion (primera version) del codigo
+**      01/11/2024 - Creacion de metodos para leer el archivo .gra
 **/
 
 #ifndef GRAMMAR_H
@@ -25,6 +26,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
 #include "alphabet.h"
 #include "non_terminal.h"
@@ -33,15 +35,17 @@
 class Grammar {
  private:
   Alphabet terminal_symbols_;
-  std::vector<Non_terminal> non_terminal_symbols_;
-  std::vector<Production> productions_;
+  std::set<Chain> non_terminal_symbols_;
+  std::map<Chain, std::vector<Production>> productions_;
   bool ReadGrammar (const std::string&);
  public:
   Grammar () = default;
   Grammar (const std::string&);
-  const std::vector<Production>& getProductions () const {return productions_;}
-  const bool FindProduction (const Production&);
-  const Production& FindEquivalentProduction (const Production&);
+  const Alphabet& getTerminalSymbols () {return terminal_symbols_;}
+  const std::set<Chain>& getNonTerminalSymbols () {return non_terminal_symbols_;}
+  const std::map<Chain, std::vector<Production>>& getProductions () const {return productions_;}
+  const bool FindNonTerminal (const Chain&);
+  const Production& FindProduction (const Production&);
 };
 
 #endif

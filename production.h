@@ -17,6 +17,7 @@
 
 ** Historial de revisiones:
 **      01/11/2024 - Creacion (primera version) del codigo
+**      01/11/2024 - Creacion de operadores para la utilizacion de set
 **/
 
 #ifndef PRODUCTION_H
@@ -30,16 +31,22 @@
 class Production {
  private:
   Chain sequence_;
-  Non_terminal production_symbol_;
+  Chain production_symbol_;
  public:
+  Production () = default;
+  Production (const Chain& production_symbol) : production_symbol_ (production_symbol) {}
+  Production (const Symbol& production_symbol) {
+    production_symbol_.AddBack(production_symbol);
+  }
   const Chain& getSequence () const {return sequence_;}
-  const Non_terminal& getProductionSymbol () const {return production_symbol_;}
+  const Chain& getProductionSymbol () const {return production_symbol_;}
   const bool Empty ();
-  const bool Unitary ();
-  const bool Useless ();
+  //const bool Unitary ();
+  //const bool Useless ();
   friend std::istream& operator >>(std::istream& in, Production& production);
 
 };
-bool operator ==(const Production&, const Production&);
+bool operator==(const Production&, const Production&);
+bool operator<(const Production&, const Production&);
 
 #endif

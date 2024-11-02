@@ -28,6 +28,7 @@ class Symbol {
   char character_;
 
  public:
+  Symbol () = default;
   Symbol (char character) : character_(character) {}; //Constructor for class symbol
   char getSymbol () const {return character_;} //Getter
 

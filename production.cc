@@ -17,6 +17,7 @@
 
 ** Historial de revisiones:
 **      01/11/2024 - Creacion (primera version) del codigo
+**      01/11/2024 - Creacion de operadores para la utilizacion de set
 **/
 
 #include <iostream>
@@ -25,31 +26,36 @@
 
 
 const bool Production::Empty () {
-  if (getSequence().ChainSize() == 0) {
+  if (getSequence().Empty() || (getSequence().ChainSize() == 0 && getSequence().getChain()[0] == Symbol ('&')))  {
     return true;
   }
   return false;
 }
 
-
+/*
 const bool Production::Unitary () {
-  //if (getSequence().ChainSize() == 0 && getSequence()[0].getSymbol())
 }
 
 
 const bool Production::Useless () {
 
 }
+*/
 
-std::istream& operator >>(std::istream& in, Production& production) {
+std::istream& operator>>(std::istream& in, Production& production) {
   in >> production.production_symbol_;
   in >> production.sequence_;
+  return in;
 }
 
 
-bool operator ==(const Production& prod_1, const Production& prod_2) {
+bool operator==(const Production& prod_1, const Production& prod_2) {
   if (prod_1.getProductionSymbol() == prod_2.getProductionSymbol()) {
     return true;
   }
   return false;
+}
+
+bool operator<(const Production& prod_1, const Production& prod_2) {
+  return prod_1.getSequence().ChainSize() < prod_2.getSequence().ChainSize();
 }

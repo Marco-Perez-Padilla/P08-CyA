@@ -82,7 +82,7 @@ void ValidateCommand(int argc, char* argv[]) {
     Usage();
     exit(EXIT_FAILURE);
   }
-  if (argc == 3 && (std::string(argv[1]).find('.') != std::string::npos) && (std::string(argv[2]).find('.') != std::string::npos)) {
+  if (argc == 3) {
     CheckFileError(std::string(argv[1]));
     CheckFileError(std::string(argv[2]));
     return;
@@ -119,6 +119,6 @@ void Help () {
  * @brief Prints how to use the program
  */
 void Usage() {
-  std::cout << "How to use: ./Grammar2CNF input.fa <input.txt|string>\n"
+  std::cout << "How to use: ./Grammar2CNF input.gra output.gra\n"
             << "Try './Grammar2CNF --help' for further information\n";
 }

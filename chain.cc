@@ -25,6 +25,7 @@
 **      21/10/2024 - Adición método FindAll
 **      21/10/2024 - Adición sobrecarga operador []
 **      01/11/2024 - Adicion sobrecarga operador >>
+**      01/11/2024 - Adicion constructor sobre un simbolo
 **/
 
 #include <algorithm>
@@ -32,6 +33,9 @@
 #include <fstream>
 
 #include "chain.h"
+
+
+
 
 /**
  * @brief Method to get the size of a chain (Longitud)
@@ -152,6 +156,14 @@ const Symbol& Chain::operator[](long unsigned int index) const {
  * @return istream
  */
 std::istream& operator >>(std::istream& in, Chain& cadena) {
-  in >> cadena;
+  std::string line;
+    if (std::getline(in, line)) { 
+      for (char chr : line) { 
+        if (chr != ' ') { 
+          Symbol symbol(chr); 
+          cadena.AddBack(symbol); 
+        }
+      }
+    }
   return in;
 }

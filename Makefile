@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++23 -Wall -g
 SOURCES = $(wildcard *.cc)
 OBJ = $(SOURCES:.cc=.o)
 
-EXECUTABLE = main
+EXECUTABLE = Grammar2CNF
 
 all: $(EXECUTABLE)
 
