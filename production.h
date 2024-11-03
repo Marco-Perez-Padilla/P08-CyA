@@ -18,6 +18,7 @@
 ** Historial de revisiones:
 **      01/11/2024 - Creacion (primera version) del codigo
 **      01/11/2024 - Creacion de operadores para la utilizacion de set
+**      02/11/2024 - Creacion de constructor dados tanto una secuencia como un simbolo no terminal
 **/
 
 #ifndef PRODUCTION_H

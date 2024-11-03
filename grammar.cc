@@ -19,6 +19,7 @@
 **      01/11/2024 - Creacion (primera version) del codigo
 **      01/11/2024 - Creacion de metodos para leer el archivo .gra
 **      02/11/2024 - Correcion de bugs en el metodo ReadGrammar
+**      02/11/2024 - Creacion de InsertProduction y ChomskyNormalForm
 **/
 
 #include <iostream>
@@ -296,20 +297,10 @@ const Grammar& Grammar::ChomskyNormalForm (const Grammar& grammar) const {
       }
     }
   }
+  return simplifying_grammar;
 } 
 
 
 void Grammar::InsertProduction(const Chain& non_terminal, const Production& production) {
   productions_[non_terminal].push_back(production);
 }
-
-
-/*
-const Production& Grammar::FindProduction (const Production& production) {
-  for (int i {0}; i < getProductions().size(); ++i) {
-    if (production == getProductions()[i]) {
-      return getProductions()[i];
-    }
-  }
-}
-*/

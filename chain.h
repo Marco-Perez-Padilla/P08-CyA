@@ -25,6 +25,8 @@
 **      21/10/2024 - Adición sobrecarga operador []
 **      01/11/2024 - Adicion sobrecarga operador >>
 **      01/11/2024 - Adicion constructor sobre un simbolo
+**      02/11/2024 - Adicion Addback para una cadena
+**      02/11/2024 - Adicion metodos Replace
 **/
 
 #ifndef CHAIN_H
@@ -54,8 +56,8 @@ class Chain {
   void AddBack (const Chain& new_chain);
   bool Empty() const; 
   const long unsigned int FindAll(const Symbol& symbol) const;
-  void Replace (int, const Symbol&);
-  void Replace (int, const Chain&);
+  void Replace (long unsigned int, const Symbol&);
+  void Replace (long unsigned int, const Chain&);
   //Overload of operators
   bool operator<(const Chain&) const;
   bool operator==(const Chain&) const;

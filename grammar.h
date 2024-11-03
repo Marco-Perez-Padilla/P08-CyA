@@ -18,6 +18,7 @@
 ** Historial de revisiones:
 **      01/11/2024 - Creacion (primera version) del codigo
 **      01/11/2024 - Creacion de metodos para leer el archivo .gra
+**      02/11/2024 - Creacion de InsertProduction y ChomskyNormalForm
 **/
 
 #ifndef GRAMMAR_H
@@ -49,7 +50,6 @@ class Grammar {
   const std::map<Chain, std::vector<Production>>& getProductions () const {return productions_;}
   // Non-terminals methods
   const bool FindNonTerminal (const Chain&) const;
-  const Production& FindProduction (const Production&);
   // Grammar methods
   const Grammar& ChomskyNormalForm (const Grammar&) const; 
   void InsertProduction(const Chain& non_terminal, const Production& production);

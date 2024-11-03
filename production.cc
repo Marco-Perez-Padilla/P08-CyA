@@ -25,6 +25,12 @@
 #include "production.h"
 
 
+/**
+ * @brief Overload of >> operator 
+ * @param istream 
+ * @param Production
+ * @return istream
+ */
 std::istream& operator>>(std::istream& in, Production& production) {
   in >> production.production_symbol_;
   in >> production.sequence_;
@@ -32,6 +38,12 @@ std::istream& operator>>(std::istream& in, Production& production) {
 }
 
 
+/**
+ * @brief Overload of == operator 
+ * @param Production 
+ * @param Production
+ * @return bool-type. True if both productions are equal. False otherwise
+ */
 bool operator==(const Production& prod_1, const Production& prod_2) {
   if (prod_1.getProductionSymbol() == prod_2.getProductionSymbol()) {
     return true;
@@ -39,6 +51,13 @@ bool operator==(const Production& prod_1, const Production& prod_2) {
   return false;
 }
 
+
+/**
+ * @brief Overload of < operator 
+ * @param Production 
+ * @param Production
+ * @return bool-type. True if the first production is minor than the second one. False otherwise
+ */
 bool operator<(const Production& prod_1, const Production& prod_2) {
   return prod_1.getSequence().ChainSize() < prod_2.getSequence().ChainSize();
 }

@@ -27,6 +27,7 @@
 **      01/11/2024 - Adicion sobrecarga operador >>
 **      01/11/2024 - Adicion constructor sobre un simbolo
 **      02/11/2024 - Adicion Addback para una cadena
+**      02/11/2024 - Adicion metodos Replace
 **/
 
 #include <algorithm>
@@ -71,7 +72,7 @@ void Chain::AddBack (const Symbol& new_symbol) {
  * @return Previous chain with the wanted addition
  */
 void Chain::AddBack (const Chain& new_chain) {
-  for (int i {0}; i < new_chain.ChainSize(); ++i) {
+  for (long unsigned int i {0}; i < new_chain.ChainSize(); ++i) {
     AddBack(new_chain[i]);
   }
 }
@@ -181,7 +182,12 @@ std::istream& operator >>(std::istream& in, Chain& cadena) {
 }
 
 
-void Chain::Replace (int index, const Symbol& new_symbol) {
+/**
+ * @brief Given a symbol and a valid index, it replaces the old symbol in the index by the new specified symbol
+ * @param index int, index of the old symbol to be replaced
+ * @param Symbol new symbol to replace old symbol
+ */
+void Chain::Replace (long unsigned int index, const Symbol& new_symbol) {
   if (index >= getChain().size()) {
     throw std::out_of_range("Index out of range.");
   }
@@ -189,20 +195,24 @@ void Chain::Replace (int index, const Symbol& new_symbol) {
 }
 
 
-
-void Chain::Replace (int index, const Chain& new_symbol) {
+/**
+ * @brief Given a Chain and an index, it replaces an old symbol in the given index by the new chain
+ * @param index int, index of the old symbol to be replaced
+ * @param Chain new chain to insert in the old symbol index
+ */
+void Chain::Replace (long unsigned int index, const Chain& new_symbol) {
   if (index >= getChain().size()) {
     throw std::out_of_range("Index out of range.");
   }
   std::vector<Symbol> new_chain;
-  for (int i {0}; i < index; ++i) {
+  for (long unsigned int i {0}; i < index; ++i) {
     new_chain.push_back(chain_[i]);
   }
   for (const Symbol& symbol : new_symbol.getChain()) {
     new_chain.push_back(symbol);
   }
   
-  for (int i = index + 1; i < ChainSize(); ++i) {
+  for (long unsigned int i = index + 1; i < ChainSize(); ++i) {
     new_chain.push_back(chain_[i]);
   }
   chain_ = new_chain;
