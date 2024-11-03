@@ -19,6 +19,7 @@
 **      20/09/2024 - Creacion (primera version) del codigo
 **      23/09/2024 - Adición del método empty
 **      18/10/2024 - Adición del método find
+**      03/11/2024 - Adicion del método size
 **/
 
 #ifndef ALPHABET_H
@@ -41,6 +42,7 @@ class Alphabet {
   bool Empty() const;
   void AddSymbol (const Symbol&); //Function to add symbols to the alphabet
   bool Find (const Symbol&) const; //Function to check if a certain symbol is part of alphabet
+  int Size() const;
 };
 std::ostream& operator<<(std::ostream& os, const Alphabet&); //Overload of out stream operator for alphabet class
 

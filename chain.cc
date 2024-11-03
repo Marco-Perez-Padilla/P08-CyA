@@ -9,7 +9,7 @@
 ** Correo: alu0101469348@ull.edu.es
 ** Fecha: 20/09/2024
 
-** Archivo chain.cc: Implemenatción de la clase cadena.
+** Archivo chain.cc: Implementación de la clase cadena.
 **      Contiene las implementaciones de la clase cadena.
 **      
 ** Referencias:

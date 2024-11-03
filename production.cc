@@ -18,6 +18,7 @@
 ** Historial de revisiones:
 **      01/11/2024 - Creacion (primera version) del codigo
 **      01/11/2024 - Creacion de operadores para la utilizacion de set
+**      03/11/2024 - Adicion operador <<
 **/
 
 #include <iostream>
@@ -60,4 +61,16 @@ bool operator==(const Production& prod_1, const Production& prod_2) {
  */
 bool operator<(const Production& prod_1, const Production& prod_2) {
   return prod_1.getSequence().ChainSize() < prod_2.getSequence().ChainSize();
+}
+
+
+/**
+ * @brief Overload of << operator for Production class
+ * @param ostream
+ * @param Production
+ * @return ostream
+ */
+std::ostream& operator<<(std::ostream& os, const Production& production) {
+  os << production.getProductionSymbol().getChain() << " " << production.getSequence().getChain();
+  return os;
 }

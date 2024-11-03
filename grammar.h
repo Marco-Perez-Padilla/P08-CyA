@@ -19,6 +19,9 @@
 **      01/11/2024 - Creacion (primera version) del codigo
 **      01/11/2024 - Creacion de metodos para leer el archivo .gra
 **      02/11/2024 - Creacion de InsertProduction y ChomskyNormalForm
+**      03/11/2024 - Adicion segunda parte ChomskyNormalForm
+**      03/11/2024 - Adicion sobrecarga operador <<
+**      03/11/2024 - Adicion WriteGrammar
 **/
 
 #ifndef GRAMMAR_H
@@ -46,14 +49,16 @@ class Grammar {
   ~Grammar () = default;
   // Getters
   const Alphabet& getTerminalSymbols () const {return terminal_symbols_;}
-  const std::set<Chain>& getNonTerminalSymbols () {return non_terminal_symbols_;}
+  const std::set<Chain>& getNonTerminalSymbols () const {return non_terminal_symbols_;}
   const std::map<Chain, std::vector<Production>>& getProductions () const {return productions_;}
   // Non-terminals methods
   const bool FindNonTerminal (const Chain&) const;
   // Grammar methods
   const Grammar& ChomskyNormalForm (const Grammar&) const; 
   void InsertProduction(const Chain& non_terminal, const Production& production);
-
+  static void WriteGrammar (const std::string&, const Grammar&);
 };
+// Operators
+std::ostream& operator<<(std::ostream& os, const Grammar&);
 
 #endif

@@ -19,6 +19,7 @@
 **      20/09/2024 - Creacion (primera version) del codigo
 **      23/09/2024 - Adición del método empty
 **      18/10/2024 - Adición del método find
+**      03/11/2024 - Adicion del método size
 **/
 
 #include <iostream>
@@ -56,6 +57,17 @@ bool Alphabet::Find(const Symbol& symbol) const {
     return true;
   }
 }
+
+
+/**
+ * @brief Finds a symbol in an alphabet
+ * @param symbol 
+ * @return bool-type. True if found, false otherwise
+ */
+int Alphabet::Size() const {
+  return symbols_.size();
+}
+
 
 /**
  * @brief Overload of << operator for Alphabet class

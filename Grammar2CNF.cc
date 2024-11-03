@@ -4,23 +4,24 @@
 ** Grado en Ingenieria Informatica
 ** Asignatura: Computabilidad y Algoritmia
 ** Curso: 2º
-** Practica 6: Autómatas Finitos
+** Practica 8: Gramáticas en Forma Normal de Chomsky
 ** Autor: Marco Pérez Padilla
 ** Correo: alu0101469348@ull.edu.es
 ** Fecha: 18/10/2024
 
 ** Archivo p06_finite_automaton.cc: programa cliente.
-**      Contiene la funcion main del proyecto que usa las clases estado, NFA, cadena y símbolo para 
-**      crear un simulador de NFA's funcional en base a un fichero de entrada .fa y  otro .txt  que 
-**      que contienen la codificación de un NFA y una lista de cadenas, respectivamente.
+**      Contiene la funcion main del proyecto que usa las clases Grammar, Production, cadena, símbolo y 
+**      alfabeto para aplicar el algoritmo de Forma Normal de Chomsky a una gramatica dada en base a dos
+**      ficheros de entrada  y salida .gra que contienen la codificación de la gramática a transformar y
+**      el resultado, respectivamente.
 **
 ** Referencias:
 **      Enlaces de interes
 
 ** Historial de revisiones:
-**      18/10/2024 - Creacion (primera version) del codigo
-**      19/10/2024 - Creación del simulador
-**      21/10/2024 - Modificación para aceptar una cadena por línea de comando
+**      01/11/2024 - Creacion (primera version) del codigo
+**      02/11/2024 - Arreglo del constructor
+**      03/11/2024 - Creacion de FN Chomsky
 **/
 
 #include <iostream>
@@ -31,13 +32,8 @@
 int main (int argc, char* argv[]) {
   ValidateCommand(argc, argv);
   Grammar grammar(argv[1]);
-  
-  /*
-  if (argc == 3 && (std::string(argv[2]).find('.') == std::string::npos)) {
-    nfa.SingleStringSimulateAutomaton(std::string(argv[2]));
-  } else {
-    nfa.SimulateAutomaton(argv[2]);
-  }
-  */
+  Grammar simplified;
+  simplified = grammar.ChomskyNormalForm(grammar);
+  Grammar::WriteGrammar(argv[2], simplified);
   return 0;
 }
