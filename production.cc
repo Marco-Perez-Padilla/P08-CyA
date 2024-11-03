@@ -25,23 +25,6 @@
 #include "production.h"
 
 
-const bool Production::Empty () {
-  if (getSequence().Empty() || (getSequence().ChainSize() == 0 && getSequence().getChain()[0] == Symbol ('&')))  {
-    return true;
-  }
-  return false;
-}
-
-/*
-const bool Production::Unitary () {
-}
-
-
-const bool Production::Useless () {
-
-}
-*/
-
 std::istream& operator>>(std::istream& in, Production& production) {
   in >> production.production_symbol_;
   in >> production.sequence_;

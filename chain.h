@@ -51,9 +51,11 @@ class Chain {
   const long unsigned int ChainSize() const;
   const Chain Inverse () const;
   void AddBack (const Symbol& new_symbol);
+  void AddBack (const Chain& new_chain);
   bool Empty() const; 
   const long unsigned int FindAll(const Symbol& symbol) const;
-
+  void Replace (int, const Symbol&);
+  void Replace (int, const Chain&);
   //Overload of operators
   bool operator<(const Chain&) const;
   bool operator==(const Chain&) const;

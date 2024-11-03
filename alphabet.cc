@@ -49,7 +49,7 @@ void Alphabet::AddSymbol (const Symbol& symbol) {
  * @param symbol 
  * @return bool-type. True if found, false otherwise
  */
-bool Alphabet::Find(const Symbol& symbol) {
+bool Alphabet::Find(const Symbol& symbol) const {
   if (std::find(getSymbols().begin(), getSymbols().end(), symbol) == getSymbols().end()) {
     return false;
   } else {

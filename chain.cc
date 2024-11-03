@@ -26,6 +26,7 @@
 **      21/10/2024 - Adición sobrecarga operador []
 **      01/11/2024 - Adicion sobrecarga operador >>
 **      01/11/2024 - Adicion constructor sobre un simbolo
+**      02/11/2024 - Adicion Addback para una cadena
 **/
 
 #include <algorithm>
@@ -33,8 +34,6 @@
 #include <fstream>
 
 #include "chain.h"
-
-
 
 
 /**
@@ -64,6 +63,19 @@ const Chain Chain::Inverse () const {
 void Chain::AddBack (const Symbol& new_symbol) {
   chain_.push_back(new_symbol);
 }
+
+
+/**
+ * @brief Addition of new symbols to the chain
+ * @param chain
+ * @return Previous chain with the wanted addition
+ */
+void Chain::AddBack (const Chain& new_chain) {
+  for (int i {0}; i < new_chain.ChainSize(); ++i) {
+    AddBack(new_chain[i]);
+  }
+}
+
 
 /**
  * @brief Empty method to see if a chain is empty
@@ -166,4 +178,32 @@ std::istream& operator >>(std::istream& in, Chain& cadena) {
       }
     }
   return in;
+}
+
+
+void Chain::Replace (int index, const Symbol& new_symbol) {
+  if (index >= getChain().size()) {
+    throw std::out_of_range("Index out of range.");
+  }
+  chain_[index] = new_symbol;
+}
+
+
+
+void Chain::Replace (int index, const Chain& new_symbol) {
+  if (index >= getChain().size()) {
+    throw std::out_of_range("Index out of range.");
+  }
+  std::vector<Symbol> new_chain;
+  for (int i {0}; i < index; ++i) {
+    new_chain.push_back(chain_[i]);
+  }
+  for (const Symbol& symbol : new_symbol.getChain()) {
+    new_chain.push_back(symbol);
+  }
+  
+  for (int i = index + 1; i < ChainSize(); ++i) {
+    new_chain.push_back(chain_[i]);
+  }
+  chain_ = new_chain;
 }

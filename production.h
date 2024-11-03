@@ -26,8 +26,6 @@
 #include <iostream>
 
 #include "chain.h"
-#include "non_terminal.h"
-
 class Production {
  private:
   Chain sequence_;
@@ -35,14 +33,12 @@ class Production {
  public:
   Production () = default;
   Production (const Chain& production_symbol) : production_symbol_ (production_symbol) {}
+  Production (const Chain& sequence, const Chain& production_symbol) : sequence_(sequence), production_symbol_ (production_symbol) {}
   Production (const Symbol& production_symbol) {
     production_symbol_.AddBack(production_symbol);
   }
   const Chain& getSequence () const {return sequence_;}
   const Chain& getProductionSymbol () const {return production_symbol_;}
-  const bool Empty ();
-  //const bool Unitary ();
-  //const bool Useless ();
   friend std::istream& operator >>(std::istream& in, Production& production);
 
 };

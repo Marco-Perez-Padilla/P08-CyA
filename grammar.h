@@ -29,23 +29,31 @@
 #include <map>
 
 #include "alphabet.h"
-#include "non_terminal.h"
 #include "production.h"
 
 class Grammar {
  private:
-  Alphabet terminal_symbols_;
-  std::set<Chain> non_terminal_symbols_;
-  std::map<Chain, std::vector<Production>> productions_;
-  bool ReadGrammar (const std::string&);
+  Alphabet terminal_symbols_;                              // Stores the terminal symbols
+  std::set<Chain> non_terminal_symbols_;                   // Stores the non terminal symbols
+  std::map<Chain, std::vector<Production>> productions_;   // Stores the productions as a whole
+  bool ReadGrammar (const std::string&);                   // Reads the grammar and is used in the constructor
  public:
+  // Constructors
   Grammar () = default;
   Grammar (const std::string&);
-  const Alphabet& getTerminalSymbols () {return terminal_symbols_;}
+  // Default destructor
+  ~Grammar () = default;
+  // Getters
+  const Alphabet& getTerminalSymbols () const {return terminal_symbols_;}
   const std::set<Chain>& getNonTerminalSymbols () {return non_terminal_symbols_;}
   const std::map<Chain, std::vector<Production>>& getProductions () const {return productions_;}
-  const bool FindNonTerminal (const Chain&);
+  // Non-terminals methods
+  const bool FindNonTerminal (const Chain&) const;
   const Production& FindProduction (const Production&);
+  // Grammar methods
+  const Grammar& ChomskyNormalForm (const Grammar&) const; 
+  void InsertProduction(const Chain& non_terminal, const Production& production);
+
 };
 
 #endif

@@ -40,7 +40,7 @@ class Alphabet {
 
   bool Empty() const;
   void AddSymbol (const Symbol&); //Function to add symbols to the alphabet
-  bool Find (const Symbol&); //Function to check if a certain symbol is part of alphabet
+  bool Find (const Symbol&) const; //Function to check if a certain symbol is part of alphabet
 };
 std::ostream& operator<<(std::ostream& os, const Alphabet&); //Overload of out stream operator for alphabet class
 
