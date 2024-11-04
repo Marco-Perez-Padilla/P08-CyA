@@ -32,6 +32,7 @@
 int main (int argc, char* argv[]) {
   ValidateCommand(argc, argv);
   Grammar grammar(argv[1]);
+  std::cout << grammar << std::endl;
   Grammar simplified;
   simplified = grammar.ChomskyNormalForm(grammar);
   Grammar::WriteGrammar(argv[2], simplified);

@@ -45,6 +45,14 @@ Grammar::Grammar (const std::string& input_gra) {
 }
 
 
+const long unsigned int Grammar::GetProductionCount() const {
+  long unsigned int count {0};
+  for (const auto& entry : productions_) {
+    count += entry.second.size();
+  }
+  return count;
+}
+
 /**
  * @brief Method to read the grammar given by a .gra input file
  * @param string name of the input file
@@ -211,14 +219,17 @@ bool Grammar::ReadGrammar (const std::string& file_gra) {
             }
           }
           // Add production
-          productions_[Chain(prod_symbol)].push_back(Production(sequence, prod_symbol));
-        }
+          if (i == 0) {
+            productions_[Chain(prod_symbol)].push_back(Production(sequence, prod_symbol, true));
+          } else {
+            productions_[Chain(prod_symbol)].push_back(Production(sequence, prod_symbol));
+          }
+        }  
       } else {
         std::cerr << "Error in line " << alphabet_size + non_terminal_size + 4 + i << ": " << prod_symbol << " hasn't been specified beforehand" << std::endl;
         return false;
       }
       ++iteration;
-
     }
   }
   if (iteration != productions_number) {
@@ -257,9 +268,9 @@ const Grammar& Grammar::ChomskyNormalForm (const Grammar& grammar) const {
   for (auto& productions : grammar.getProductions()) {
     const Chain& prod_symbol = productions.first;
     const std::vector<Production>& prod_list = productions.second;
-    Chain new_sequence;
     // For each production
     for (const Production& production : prod_list) {
+      Chain new_sequence;
       // If it has at least two elements
       if (production.getSequence().ChainSize() >= 2) {
         Chain sequence = production.getSequence();
@@ -274,9 +285,11 @@ const Grammar& Grammar::ChomskyNormalForm (const Grammar& grammar) const {
               Chain new_name;
               new_name.AddBack(terminal_symbol);
               new_name.AddBack(Symbol('_'));
+
               Chain new_non_terminal_chain(new_name);
               new_non_terminal[terminal_symbol] = new_non_terminal_chain;
-              Production new_prod (new_non_terminal_chain, Chain({terminal_symbol}));
+              
+              Production new_prod (Chain({terminal_symbol}), new_non_terminal_chain);
               simplifying_grammar.InsertProduction(new_non_terminal_chain, new_prod);
               new_sequence.AddBack(new_non_terminal_chain);
             }
@@ -284,11 +297,12 @@ const Grammar& Grammar::ChomskyNormalForm (const Grammar& grammar) const {
             new_sequence.AddBack(sequence[i]);
           }
         }
-        Production new_production(prod_symbol, new_sequence);
+        Production new_production(new_sequence, prod_symbol);
         simplifying_grammar.InsertProduction(prod_symbol, new_production);
       }
     }
   }
+  std::cout << simplifying_grammar << std::endl;
   // Step two
   for (auto& productions : simplifying_grammar.getProductions()) {
     const Chain& prod_symbol = productions.first;
@@ -302,7 +316,7 @@ const Grammar& Grammar::ChomskyNormalForm (const Grammar& grammar) const {
         Chain possible_non_terminal;
         for (int i = sequence.ChainSize() - 2; i >= 1; --i) {
           
-          possible_non_terminal.AddBack(sequence[i]);
+          possible_non_terminal.AddBack(sequence[i+1]);
           if (!FindNonTerminal(possible_non_terminal.Inverse())) {
             continue;
           }
@@ -357,7 +371,7 @@ std::ostream& operator<<(std::ostream& os, const Grammar& grammar) {
   for (const Chain& non_terminal : grammar.getNonTerminalSymbols()) {
     os << non_terminal << std::endl;
   }
-  os << grammar.getProductions().size() << std::endl;
+  os << grammar.GetProductionCount() << std::endl;
   for (const auto& non_terminal : grammar.getProductions()) {
     for (const Production& production : non_terminal.second) {
       os << production << std::endl;

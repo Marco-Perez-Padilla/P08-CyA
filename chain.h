@@ -27,6 +27,7 @@
 **      01/11/2024 - Adicion constructor sobre un simbolo
 **      02/11/2024 - Adicion Addback para una cadena
 **      02/11/2024 - Adicion metodos Replace
+**      03/11/2024 - Adicion sobrecarga operador <<
 **/
 
 #ifndef CHAIN_H

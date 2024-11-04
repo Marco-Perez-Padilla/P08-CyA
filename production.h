@@ -20,6 +20,7 @@
 **      01/11/2024 - Creacion de operadores para la utilizacion de set
 **      02/11/2024 - Creacion de constructor dados tanto una secuencia como un simbolo no terminal
 **      03/11/2024 - Adicion operador <<
+**      03/11/2024 - Adicion atributo start
 **/
 
 #ifndef PRODUCTION_H
@@ -32,17 +33,19 @@ class Production {
  private:
   Chain sequence_;           // Sequence that specifies the production rule
   Chain production_symbol_;  // Non terminal symbol of each production
+  bool start_;               // Identifies the start symbol
  public:
   // Constructors
   Production () = default;
   Production (const Chain& production_symbol) : production_symbol_ (production_symbol) {}
-  Production (const Chain& sequence, const Chain& production_symbol) : sequence_(sequence), production_symbol_ (production_symbol) {}
+  Production (const Chain& sequence, const Chain& production_symbol, const bool start = false) : sequence_(sequence), production_symbol_ (production_symbol), start_ (start) {}
   Production (const Symbol& production_symbol) {
     production_symbol_.AddBack(production_symbol);
   }
   // Getters
   const Chain& getSequence () const {return sequence_;}
   const Chain& getProductionSymbol () const {return production_symbol_;}
+  const bool getStart () const {return start_;}
   // Operator
   friend std::istream& operator >>(std::istream& in, Production& production);
 };

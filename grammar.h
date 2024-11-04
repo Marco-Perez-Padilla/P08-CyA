@@ -51,6 +51,7 @@ class Grammar {
   const Alphabet& getTerminalSymbols () const {return terminal_symbols_;}
   const std::set<Chain>& getNonTerminalSymbols () const {return non_terminal_symbols_;}
   const std::map<Chain, std::vector<Production>>& getProductions () const {return productions_;}
+  const long unsigned int GetProductionCount() const;
   // Non-terminals methods
   const bool FindNonTerminal (const Chain&) const;
   // Grammar methods
